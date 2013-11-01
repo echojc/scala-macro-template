@@ -11,3 +11,5 @@ The build file is based on the one found in the SBT docs here:
 http://www.scala-sbt.org/0.13.0/docs/Detailed-Topics/Macro-Projects.html
 
 To compile and run everything, simply use `sbt run`.
+
+Uses scala 2.11.0-M5 without Macro Paradise. Tested with sbt 0.13.0.
