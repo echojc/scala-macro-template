@@ -12,7 +12,7 @@ object Mappable {
   def materializeMappableImpl[T: c.WeakTypeTag](c: Context): c.Expr[Mappable[T]] = {
     import c.universe._
     val tpe = weakTypeOf[T]
-    val companion = tpe.typeSymbol.asClass.companionSymbol
+    val companion = tpe.typeSymbol.companionSymbol
 
     val fields = tpe.declarations.collectFirst {
       case m: MethodSymbol if m.isPrimaryConstructor ⇒ m
