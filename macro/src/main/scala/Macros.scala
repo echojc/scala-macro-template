@@ -21,7 +21,7 @@ object Mappable {
     val (toMapParams, fromMapParams) = fields.map { field ⇒
       val name = field.name
       val decoded = name.decoded
-      val returnType = tpe.declaration(name).asMethod.returnType
+      val returnType = tpe.declaration(name).typeSignature
 
       (q"$decoded → t.$name", q"map($decoded).asInstanceOf[$returnType]")
     }.unzip
