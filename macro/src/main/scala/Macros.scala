@@ -29,7 +29,7 @@ object Mappable {
     c.Expr[Mappable[T]] { q"""
       new Mappable[$tpe] {
         def toMap(t: $tpe): Map[String, Any] = Map(..$toMapParams)
-        def fromMap(map: Map[String, Any]): $tpe = ${companion}(..$fromMapParams)
+        def fromMap(map: Map[String, Any]): $tpe = $companion(..$fromMapParams)
       }
     """ }
   }
