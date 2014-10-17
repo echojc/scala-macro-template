@@ -1,5 +1,5 @@
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 trait Mappable[T] {
   def toMap(t: T): Map[String, Any]
@@ -12,16 +12,16 @@ object Mappable {
   def materializeMappableImpl[T: c.WeakTypeTag](c: Context): c.Expr[Mappable[T]] = {
     import c.universe._
     val tpe = weakTypeOf[T]
-    val companion = tpe.typeSymbol.companionSymbol
+    val companion = tpe.typeSymbol.companion
 
-    val fields = tpe.declarations.collectFirst {
+    val fields = tpe.decls.collectFirst {
       case m: MethodSymbol if m.isPrimaryConstructor ⇒ m
-    }.get.paramss.head
+    }.get.paramLists.head
 
     val (toMapParams, fromMapParams) = fields.map { field ⇒
-      val name = field.name
-      val decoded = name.decoded
-      val returnType = tpe.declaration(name).typeSignature
+      val name = field.name.toTermName
+      val decoded = name.decodedName.toString
+      val returnType = tpe.decl(name).typeSignature
 
       (q"$decoded → t.$name", q"map($decoded).asInstanceOf[$returnType]")
     }.unzip
