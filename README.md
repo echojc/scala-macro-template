@@ -12,4 +12,7 @@ http://www.scala-sbt.org/0.13.0/docs/Detailed-Topics/Macro-Projects.html
 
 To compile and run everything, simply use `sbt run`.
 
-Uses scala 2.11.0-M5 without Macro Paradise. Tested with sbt 0.13.0.
+Uses scala 2.11.2 without Macro Paradise. Tested with sbt 0.13.0.
+
+There is an example on the branch `complete-example`:
+https://github.com/echojc/scala-macro-template/tree/complete-example
